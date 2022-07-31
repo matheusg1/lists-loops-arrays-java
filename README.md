@@ -1,6 +1,6 @@
-# Loops e arrays em Java
+# Listas, loops e arrays em Java
 
-Exercício com Loops e Arrays baseados no **Santander Bootcamp Fullstack Developer**.
+Exercício com listas, loops e Arrays baseados no **Santander Bootcamp Fullstack Developer**.
 
 Uma classe principal com o menu que leva às seguintes funções:
 
@@ -10,10 +10,8 @@ Uma classe principal com o menu que leva às seguintes funções:
 
 `[3] Contador de pares e ímpares`
 
-`[4] Contador de vogais`
+`[4] Contador de vogais e consoantes`
 
-`[5] Contador de consoantes`
+`[5] Matriz com números aleatórios`
 
-`[6] Matriz com números aleatórios`
-
-`[7] Números aleatórios e seus sucessores`
+`[6] Números aleatórios e seus sucessores`
