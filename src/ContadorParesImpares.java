@@ -1,44 +1,63 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ContadorParesImpares {
-    public ContadorParesImpares() { // ContadorParesImpares
+    int valorDigitado;
+    List<Integer> pares = new ArrayList<Integer>();
+    List<Integer> impares = new ArrayList<Integer>();
+
+    public ContadorParesImpares() { 
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Olá, este programa lê N números e mostra a a quantidade de ímpares e pares.");
+        System.out.println("Olá, este programa lê N números, mostra quais e quantos foram par/ímpar.");
 
-        int quantidadePares = 0, quantidadeImpares = 0;
+        while(true){
+            System.out.println("Adicione um valor  // [0] para sair");
+            setValorDigitado(sc.nextInt());
+    
 
-        System.out.println("Quantos valores você irá adicionar? ");
-        int quantidadeValores = sc.nextInt();
-
-        for (int i = 0; i < quantidadeValores; i++) {
-            System.out.println("Digite o "+ (i+1) +"º valor ");
-            int valorDigitado = sc.nextInt();
-
-            if (valorDigitado % 2 == 0) quantidadePares++;
-            else quantidadeImpares++;
+            if (getValorDigitado() == 0){
+                break;
+            }
+            else if (getValorDigitado() % 2 == 0){
+                addPar(getValorDigitado());
+            }
+            else {
+                addImpar(getValorDigitado());
+            }
         }
 
-        /*
-        // outra forma
-        int count = 0;
-        do{
-            System.out.println("Digite o " + (count + 1) + "º valor ");
-            int valorDigitado = sc.nextInt();
-
-            if (valorDigitado % 2 == 0){
-                quantidadePares++;
-            }
-            else{
-                quantidadeImpares++;
-            }
-
-            count++;
-        }while(count < quantidadeValores);
-        */
         sc.close();
         
-        System.out.println("A quantidade de pares foi " + quantidadePares + " e a quantidade de ímpares foi " + quantidadeImpares + ".");
+        System.out.println("A quantidade de pares foi " + getPares().size() + ", sendo " + getPares() + ".");
+        System.out.println("A quantidade de ímpares foi " + getImpares().size() + ", sendo " + getImpares() + ".");
+    }
+
+    public void addPar(int valor){
+        this.pares.add(valor);
 
     }
+
+    public void addImpar(int valor){
+        this.impares.add(valor);
+
+    }
+
+    public int getValorDigitado() {
+        return this.valorDigitado;
+    }
+
+    public void setValorDigitado(int valorDigitado) {
+        this.valorDigitado = valorDigitado;
+    }
+
+    public List<Integer> getPares() {
+        return this.pares;
+    }
+
+    public List<Integer> getImpares() {
+        return this.impares;
+    }
+
 }

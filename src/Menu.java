@@ -1,15 +1,28 @@
 import java.util.Scanner;
 
 public class Menu {
-    public static void main(String[] args){        
+    int opcaoEscolhida;
+
+    public static void main(String[] args) {
         System.out.println("Olá, selecione um dos programas para continuar.");
 
         Scanner sc = new Scanner(System.in);
+        var menu = new Menu();
         
-        System.out.println("[1]Calculadora\n[2]Fatorial\n[3]Contador de pares e ímpares\n[4]Contador de vogais\n[5]Contador de consoantes\n[6]Matriz com números aleatórios\n[7]Números e seus sucessores");
-        int opcaoEscolhida = sc.nextInt();
-        
-        switch(opcaoEscolhida){
+        System.out.println("[1]Calculadora\n[2]Fatorial\n[3]Contador de pares e ímpares\n[4]Contador de vogais e consoantes\n[5]Matriz com números aleatórios\n[6]Números e seus sucessores");
+        menu.setOpcaoEscolhida(sc.nextInt());
+
+        sc.close();
+    }
+
+    public int getOpcaoEscolhida() {
+        return this.opcaoEscolhida;
+    }
+
+    public void setOpcaoEscolhida(int opcaoEscolhida) {
+        this.opcaoEscolhida = opcaoEscolhida;
+
+        switch(this.getOpcaoEscolhida()){
             case 1:
                 new Calculadora();
                 break;
@@ -20,21 +33,17 @@ public class Menu {
                 new ContadorParesImpares();
                 break;
             case 4:
-                new ContadorVogais();
+                new ContadorVogalConsoante();
                 break;
             case 5:
-                new ContadorConsoantes();
-                break;
-            case 6:
                 new Matriz();
                 break;
-            case 7:
+            case 6:
                 new NumerosSucessores();
                 break;
             default:
                 System.out.println("Opção inválida");
+                break;
         }
-        sc.close();
     }
-
 }

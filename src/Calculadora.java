@@ -1,66 +1,144 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Calculadora {
-    public Calculadora() {
-        Scanner sc = new Scanner(System.in);
+public class Calculadora{
+    private List<Double> valoresDigitados = new ArrayList<Double>();
+    private int operacao;
+    private Double resultado;
+    private String resposta = "";
 
-        System.out.println("Olá, este programa mostra tabuadas de soma/multiplicação e faz a subtração/divisão entre dois números");
+    public Calculadora(){
+        var sc = new Scanner(System.in);
 
-        int valorDigitado, valorDigitado2, operacao;
+        System.out.println("Olá, este programa faz cálculos com as principais operações entre N números, sendo limitado a uma única operação por cálculo");
 
-        System.out.println("Digite um valor ");
-        valorDigitado = sc.nextInt();
+        do{
+            System.out.println("Digite um valor para adicionar ao cálculo // [S] para sair");
+            setResposta(sc.nextLine());
 
-        System.out.println("Soma[1]\nMultiplicação[2]\nSubtração[3]\nDivisão[4]");
-        operacao = sc.nextInt();
-        
-        switch(operacao){
-            case 1:
-                soma(valorDigitado);
-                break;
-            case 2:
-                multiplica(valorDigitado);
-                break;
-            case 3:
-                System.out.println("Digite o segundo valor");
-                valorDigitado2 = sc.nextInt();
-                subtrai(valorDigitado, valorDigitado2);
-                break;
-            case 4:
-                System.out.println("Digite o segundo valor");
-                valorDigitado2 = sc.nextInt();
-                divide(valorDigitado, valorDigitado2);
-                break;
-            default:
-                System.out.println("ERRO");
+            if(checaValorNumerico(getResposta())){
+                //getValoresDigitados().add(Double.parseDouble(getResposta()));
+                addValor(Double.parseDouble(getResposta()));
+                //valoresDigitados.add(Double.parseDouble(getResposta()));
+            }
         }
+        while(checaValorNumerico(getResposta()));
+
+        System.out.println("Digite a operação a ser feita\n[1]Soma\n[2]Subtração\n[3]Multiplicação\n[4]Divisão");
+        //int operacao = sc.nextInt();
+        setOperacao(sc.nextInt());
+
+        switch(getOperacao()){
+            case 1:
+                System.out.println("O resultado foi " + soma(getValoresDigitados()));
+                break;
+
+            case 2:
+                System.out.println("O resultado foi " + subtrai(getValoresDigitados()));
+                break;
+
+            case 3:
+                System.out.println("O resultado foi " + multiplica(getValoresDigitados()));
+                break;
+
+            case 4:
+                System.out.println("O resultado foi " + divide(getValoresDigitados()));
+                break;
+
+            default:
+                System.out.println("Erro");
+                break;
+        }
+
+        System.out.println((getValoresDigitados()));
+    
         sc.close();
     }
 
-    public void soma(int valor){
-        for (int i = 0; i <= 10; i++) {
-            int resultado = valor + i;
-            System.out.println(i +  " + " + valor + " = " + resultado);
+    public static boolean checaValorNumerico(String valor){
 
+        boolean checaNumero = true;
+
+        for (int i = 0; i < valor.length(); i++) {
+            if(!Character.isDigit(valor.charAt(i))){
+                checaNumero = false;
+            }
         }
+        return checaNumero;
     }
 
-    public void multiplica(int valor){
-        for (int i = 0; i <= 10; i++) {
-            int resultado = valor * i;
-            System.out.println(i +  " x " + valor + " = " + resultado);
+    public static Double soma(List<Double> valores){
+        Double resultado = 0d;
+
+        for (Double valor : valores){
+            resultado += valor;
         }
+
+        return resultado;
     }
 
-    public void divide(double primeiroValor, double segundoValor){
-        double resultado = primeiroValor / segundoValor;
-        System.out.println(primeiroValor +  " / " + segundoValor + " = " + resultado);
+    public static Double subtrai(List<Double> valores){
+        Double resultado = 0d;
+        Double soma = 0d;
+
+        for (int i = 1; i < valores.size(); i++) {
+            soma += valores.get(i);
+        }
+        resultado = valores.get(0) - soma;
+
+        return resultado;
+    }
+    
+    public static Double multiplica(List<Double> valores){
+        Double resultado = 1d;
+
+        for(Double valor: valores){
+            resultado *= valor;
+        }
+
+        return resultado;
+    }
+    
+    public static Double divide(List<Double> valores){
+        Double resultado = valores.get(0) / valores.get(1);
+
+        for (int i = 2; i < valores.size(); i++) {
+            resultado /= valores.get(i);
+        }
+        return resultado;
+    }
+    
+    public void addValor(Double valor){
+        this.valoresDigitados.add(valor);
     }
 
-    public void subtrai(int primeiroValor, int segundoValor){
-        int resultado = primeiroValor - segundoValor;
-        System.out.println(primeiroValor +  " - " + segundoValor + " = " + resultado);
+    public List<Double> getValoresDigitados() {
+        return this.valoresDigitados;
+    }
+
+    public int getOperacao() {
+        return this.operacao;
+    }
+
+    public void setOperacao(int operacao) {
+        this.operacao = operacao;
+    }
+
+    public Double getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(Double resultado) {
+        this.resultado = resultado;
+    }
+
+    public String getResposta() {
+        return this.resposta;
+    }
+
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
     }
 
 }
-
